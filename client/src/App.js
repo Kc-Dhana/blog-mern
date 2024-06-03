@@ -1,4 +1,5 @@
 import './App.css';
+import Post from "./Post";
 
 function App() {
   return (
@@ -10,10 +11,9 @@ function App() {
             <a href="">Register</a>
           </nav>
         </header>
-
-
-
-
+          <Post/>
+          <Post/>
+          <Post/>
       </main>
   );
 }
