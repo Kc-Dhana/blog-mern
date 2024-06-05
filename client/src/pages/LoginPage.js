@@ -1,6 +1,8 @@
 export default function LoginPage(){
     return(
-        <div>Login page</div>
+        <form action="">
+            <input type="text"/>
+        </form>
     );
 
 }
