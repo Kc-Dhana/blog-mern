@@ -7,6 +7,7 @@ const app = express();
 const jwt = require('jsonwebtoken');
 
 const salt =bcrypt.genSaltSync(10);
+const secret ='asdfe45we45w345wegw345werjktjwertkj';
 
 app.use(cors());
 app.use(express.json());
@@ -34,13 +35,14 @@ app.post('/login',async (req,res) => {
     const passOk = bcrypt.compareSync(password, userDoc.password); // true
     if (passOk){
         //login in
+        jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) =>{
+            if(err) throw err;
+            res.cookie('token',token ).json('ok');
+        });
 
     } else {
         res.status(400).json('wrong credentials');
     }
-
-
-
 });
 
 
