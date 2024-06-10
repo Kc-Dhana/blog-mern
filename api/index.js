@@ -25,8 +25,15 @@ app.post('/register',async (req,res) =>{
         res.status(400).json(e);
 
     }
-
-
 });
+
+app.post('/login',async (req,res) => {
+    const {username,password} = req.body;
+    const userDoc =await User.findOne({username});
+    const passOk = bcrypt.compareSync(password, userDoc.password); // true
+    res.json(passOk);
+});
+
+
 app.listen(4000);
 
