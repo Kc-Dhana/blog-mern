@@ -13,12 +13,17 @@ module.exports = function override(config){
         http: require.resolve("stream-http"),
         net:false,
         assert: require.resolve("assert/"),
+        vm: require.resolve('vm-browserify'),
+        //async_hooks: require.resolve('async_hooks-browserify'),
+       //
+
     });
     config.resolve.fallback = fallback;
     config.plugins = (config.plugins || []).concat([
         new webpack.ProvidePlugin({
-            process:"process/browser",
+            process:'process/browser',
         }),
     ]);
+
     return config;
 };
