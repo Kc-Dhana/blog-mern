@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {response} from "express";
 
 export default function Header(){
     const [username,setUsername] = useState(null);
@@ -9,7 +8,7 @@ export default function Header(){
             credentials: 'include',
         }).then(response =>{
             response.json().then(userInfo =>{
-                setUsername(userInfo,username);
+                setUsername(userInfo.username);
             });
         });
     }, []);
