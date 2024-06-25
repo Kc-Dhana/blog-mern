@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({dest: 'uploads/' });
 const fs =require('fs');
+const {response} = require("express");
 
 const salt =bcrypt.genSaltSync(10);
 const secret ='asdfe45we45w345wegw345werjktjwertkj';
@@ -99,6 +100,12 @@ app.get('/post', async (req,res) => {
             .limit(20) //show only new 20 post
     );
 });
+
+app.get('/post/:id', async (req,res) => {
+    const {id} = req.params;
+    const postDoc = await Post.findById(id).populate('author', ['username']);
+    res.json(postDoc);
+})
 
 app.listen(4000);
 
