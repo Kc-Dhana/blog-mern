@@ -1,20 +1,20 @@
-export default function Post(){
+import {formatISO9075} from "date-fns";
+
+export default function Post({title,summary,cover,content,createdAt,author}){
     return (
         <div className="post">
             <div className="image">
                 <img
-                    src="https://ichef.bbci.co.uk/news/1024/cpsprodpb/5496/live/49fdc940-1d9b-11ef-a090-6b563b2f66e3.jpg.webp"
+                    src={'http://localhost:4000/'+cover}
                     alt=""/>
             </div>
             <div className="texts">
-                <h2>Call of Duty to go to Game Pass in gaming shake-up</h2>
+                <h2>{title}</h2>
                 <p className="info">
-                    <a className="author">Dawid Paszko</a>
-                    <time>2024-5-29 23:04</time>
+                    <a className="author">{author.username}</a>
+                    <time>{formatISO9075(new Date(createdAt))}</time>
                 </p>
-                <p className="summary">Microsoft has torn up the rules of big video game launches by announcing its most
-                    eagerly awaited
-                    new title - Call of Duty: Black Ops 6 </p>
+                <p className="summary">{summary}</p>
             </div>
         </div>
     );
