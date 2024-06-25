@@ -6,15 +6,14 @@ export default function PostPage(){
     const [postInfo,setPostInfo] = useState(null);
     const {id} = useParams();
     useEffect(() => {
-
-        console.log(id);
         fetch(`http://localhost:4000/post/${id}`)
-            .then(response =>{
-                response.json().then(postInfo =>{
+            .then(response => {
+                response.json().then(postInfo => {
                     setPostInfo(postInfo);
                 });
             });
     }, []);
+
     if (!postInfo)return '';
 
     return(
