@@ -121,6 +121,6 @@ div.post-page div.author{
   font-size: .7rem;
   font-weight: bold;
 }
-div.post-page div.content{
+div.post-page div.content p{
   line-height: 1.6rem;
 }
