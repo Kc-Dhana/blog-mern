@@ -105,16 +105,27 @@ app.put('/post', uploadMiddleware.single('file'), async (req,res) =>{
         if(err) throw err;
         const {id,title,summary,content} = req.body;
         const postDoc = await Post.findById(id);
-        const isAuthor = postDoc.author === info.id;
-        res.json({isAuthor});
-        // const postDoc= await Post.create({
+        const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+        if(!isAuthor){
+           return res.status(400).json('you are not the author');
+        }
+        // await postDoc.update({
         //     title,
         //     summary,
         //     content,
-        //     cover:newPath,
-        //     author:info.id,
-        // })
-        // res.json({postDoc});
+        //     cover: newPath ? newPath : postDoc.cover,
+        // });
+        // Update the post fields
+        postDoc.title = title;
+        postDoc.summary = summary;
+        postDoc.content = content;
+        if (newPath) {
+            postDoc.cover = newPath;
+        }
+
+        // Save the updated post
+        await postDoc.save();
+        res.json(postDoc);
     });
 });
 
